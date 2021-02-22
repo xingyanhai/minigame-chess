@@ -1,6 +1,6 @@
 /*! 一叶孤舟 | qq:28701884 | 欢迎指教 */
 const canvas = wx.createCanvas()
-var com = com||{};
+window.com = {};
 const dataStr = require('./strData')
 com.init = async function (stype){
 	com.nowStype= stype || com.getCookie("stype") ||"stype1";
@@ -846,5 +846,5 @@ com.class.Dot = function (img, x, y){
 }
 
 
-window.com = com
+
 

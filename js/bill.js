@@ -1,33 +1,33 @@
 /*! 一叶孤舟 | qq:28701884 | 欢迎指教 */
 
-var bill = bill || {};
+window.bill = {};
 
 //初始化
 bill.init = function (){
 	if (com.store){
 		clearInterval(bill.timer);
 		bill.setBillList(com.arr2Clone(com.initMap)); //写入棋谱列表
-		play.isPlay=false;	
+		play.isPlay=false;
 		com.show();
 	}else {
-		bill.timer = setInterval("bill.init()",300);	
+		bill.timer = setInterval("bill.init()",300);
 	}
 }
 
 
 //把所有棋谱写入棋谱列表
 bill.setBillList = function (map){
-	var list=com.get("billList")
-	for (var i=0; i < com.store.length ; i++){
-		var option = document.createElement('option');
-		 option.text='棋谱'+(i+1);
-		 option.value=i;
-		list.add(option , null);
-	}
-	
-	list.addEventListener("change", function(e) {
-		bill.setBox (com.store[this.value], map)
-	})
+	// var list=com.get("billList")
+	// for (var i=0; i < com.store.length ; i++){
+	// 	var option = document.createElement('option');
+	// 	 option.text='棋谱'+(i+1);
+	// 	 option.value=i;
+	// 	list.add(option , null);
+	// }
+	//
+	// list.addEventListener("change", function(e) {
+	// 	bill.setBox (com.store[this.value], map)
+	// })
 	bill.setBox (com.store[0], map)
 }
 
@@ -55,16 +55,16 @@ bill.setMove = function (bl,inx,map){
 		if (com.mans[map[newY][newX]]) {
 			com.mans[map[newY][newX]].isShow = false;
 		}
-		
+
 		com.mans[map[y][x]].x = newX;
 		com.mans[map[y][x]].y = newY;
-		
+
 		if (i == inx) {
 			com.showPane(x ,y,newX,newY);
 		}
 		map[newY][newX] = map[y][x];
 		delete map[y][x];
-		
+
 	}
 	return map;
 }
@@ -83,17 +83,17 @@ bill.setBox = function (bl,initMap){
 		h += com.createMove(map,x,y,newX,newY);
 		h +='</li>\n\r';
 	}
-	com.get("billBox").innerHTML = h;
-	
-	var doms=com.get("billBox").getElementsByTagName("li");
-	
-	for (var i=0; i<doms.length; i++){
-			doms[i].addEventListener("click", function(e) {
-				
-			var inx = this.getAttribute("id").split("_")[1];
-			bill.setMove (bl , inx , initMap)
-			com.show();
-		})
-	}
+	// ----com.get("billBox").innerHTML = h;
+
+	// var doms=com.get("billBox").getElementsByTagName("li");
+	//
+	// for (var i=0; i<doms.length; i++){
+	// 		doms[i].addEventListener("click", function(e) {
+	//
+	// 		var inx = this.getAttribute("id").split("_")[1];
+	// 		bill.setMove (bl , inx , initMap)
+	// 		com.show();
+	// 	})
+	// }
 
 }

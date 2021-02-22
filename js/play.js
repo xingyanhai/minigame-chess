@@ -1,6 +1,6 @@
 /*! 一叶孤舟 | qq:28701884 | 欢迎指教 */
 
-var play = play||{};
+window.play = {};
 
 play.init = function (){
 
@@ -60,9 +60,9 @@ play.init = function (){
 	*/
 
 
-	com.get("regretBn").addEventListener("click", function(e) {
-		play.regret();
-	})
+	// com.get("regretBn").addEventListener("click", function(e) {
+	// 	play.regret();
+	// })
 
 	/*
 	var initTime = new Date().getTime();
@@ -187,7 +187,7 @@ play.clickMan = function (key,x,y){
 			com.dot.dots = com.mans[key].ps
 			com.show();
 			//com.get("selectAudio").start(0);
-			com.get("selectAudio").play();
+			// com.get("selectAudio").play();
 		}
 	}
 }
@@ -210,8 +210,10 @@ play.clickPoint = function (x,y){
 			play.nowManKey = false;
 			com.dot.dots = [];
 			com.show();
-			com.get("clickAudio").play();
-			setTimeout("play.AIPlay()",500);
+			// com.get("clickAudio").play();
+			setTimeout(()=> {
+				play.AIPlay()
+			},500);
 		}else{
 			//alert("不能这么走哦！")
 		}
@@ -238,7 +240,7 @@ play.AIPlay = function (){
 	}else {
 		play.AIclickPoint(pace[2],pace[3]);
 	}
-	com.get("clickAudio").play();
+	// com.get("clickAudio").play();
 
 
 }
@@ -324,4 +326,4 @@ play.showWin = function (my){
 		alert("很遗憾，你输了！");
 	}
 }
-window.play = play
+

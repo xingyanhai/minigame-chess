@@ -171,8 +171,11 @@ play.clickMan = function (key,x,y){
 			com.pane.isShow = false;
 			com.dot.dots = [];
 			com.show()
-			com.get("clickAudio").play();
-			setTimeout("play.AIPlay()",500);
+			// com.get("clickAudio").play();
+			music.playClick()
+			setTimeout(()=>{
+				play.AIPlay()
+			},500);
 			if (key == "j0") play.showWin (-1);
 			if (key == "J0") play.showWin (1);
 		}
@@ -188,6 +191,7 @@ play.clickMan = function (key,x,y){
 			com.show();
 			//com.get("selectAudio").start(0);
 			// com.get("selectAudio").play();
+			music.playSelect()
 		}
 	}
 }
@@ -211,6 +215,7 @@ play.clickPoint = function (x,y){
 			com.dot.dots = [];
 			com.show();
 			// com.get("clickAudio").play();
+			music.playClick()
 			setTimeout(()=> {
 				play.AIPlay()
 			},500);
@@ -241,6 +246,7 @@ play.AIPlay = function (){
 		play.AIclickPoint(pace[2],pace[3]);
 	}
 	// com.get("clickAudio").play();
+	music.playClick()
 
 
 }

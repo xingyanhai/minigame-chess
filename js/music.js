@@ -14,10 +14,10 @@ class Music {
     // this.bgmAudio.src = 'audio/bgm.mp3'
     // this.playBgm()
 
-    this.clickAudio = new Audio()
+    this.clickAudio = new wx.createInnerAudioContext()
     this.clickAudio.src = 'audio/click.wav'
 
-    this.selectAudio = new Audio()
+    this.selectAudio = new wx.createInnerAudioContext()
     this.selectAudio.src = 'audio/select.wav'
 
 

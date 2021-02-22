@@ -119,6 +119,12 @@ window.onload = async function(){
 	AI.historyBill = com.gambit;
 
 	com.store = dataStr.store.split(" ");
+
+	setTimeout(()=> {
+		play.isPlay=true ;
+		play.depth = 3;
+		play.init();
+	}, 2000)
 }
 
 //载入图片

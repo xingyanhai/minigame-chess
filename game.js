@@ -33,6 +33,6 @@ const init = async () => {
         play.isPlay=true ;
         play.depth = 3;
         play.init();
-    }, 2000)
+    }, 1000)
 }
 init()

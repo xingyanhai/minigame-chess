@@ -20,7 +20,7 @@
     "compileHotReLoad": false,
     "useMultiFrameRuntime": true,
     "useApiHook": true,
-    "useApiHostProcess": true,
+    "useApiHostProcess": false,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
@@ -38,7 +38,7 @@
   },
   "compileType": "game",
   "libVersion": "1.9.94",
-  "appid": "wx6f605037924b1c2d",
+  "appid": "wx28eb191a61097ee4",
   "projectname": "minigame-chess",
   "condition": {
     "search": {

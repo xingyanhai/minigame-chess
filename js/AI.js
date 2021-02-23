@@ -256,6 +256,6 @@ AI.evaluate1 = function (map,my){
 	return val*my;
 }
 
-window.AI = AI
+GameGlobal.AI = AI
 
 

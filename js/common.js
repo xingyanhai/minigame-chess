@@ -1,7 +1,7 @@
 /*! 一叶孤舟 | qq:28701884 | 欢迎指教 */
 const canvas = wx.createCanvas()
-window.com = {};
-const dataStr = require('./strData')
+GameGlobal.com = {};
+
 com.init = async function (stype){
 	com.nowStype= stype || com.getCookie("stype") ||"stype1";
 	var stype = com.stype[com.nowStype];
@@ -106,29 +106,6 @@ com.addEvent = function() {
 	})
 }
 
-window.onload = async function(){
-	await com.init()
-	com.bg=new com.class.Bg();
-	com.dot = new com.class.Dot();
-	com.pane=new com.class.Pane();
-	com.pane.isShow=false;
-
-	com.childList=[com.bg,com.dot,com.pane];
-	com.mans	 ={};		//棋子集合
-	com.createMans(com.initMap)		//生成棋子
-	com.bg.show();
-	// com.addEvent()
-	com.gambit = dataStr.gambit.split(" ");
-	AI.historyBill = com.gambit;
-
-	com.store = dataStr.store.split(" ");
-
-	setTimeout(()=> {
-		play.isPlay=true ;
-		play.depth = 3;
-		play.init();
-	}, 2000)
-}
 
 //载入图片
 com.loadImages = async function(stype){
@@ -230,17 +207,17 @@ com.alert = function (obj,f,n){
 var z = com.alert;
 
 //获取元素距离页面左侧的距离
-com.getDomXY = function (dom){
-	var left = dom.offsetLeft;
-	var top = dom.offsetTop;
-	var current = dom.offsetParent;
-	while (current !== null){
-		left += current.offsetLeft;
-		top += current.offsetTop;
-		current = current.offsetParent;
-	}
-	return {x:left,y:top};
-}
+// com.getDomXY = function (dom){
+// 	var left = dom.offsetLeft;
+// 	var top = dom.offsetTop;
+// 	var current = dom.offsetParent;
+// 	while (current !== null){
+// 		left += current.offsetLeft;
+// 		top += current.offsetTop;
+// 		current = current.offsetParent;
+// 	}
+// 	return {x:left,y:top};
+// }
 
 //获得cookie
 com.getCookie = function(name){
@@ -264,26 +241,6 @@ com.arr2Clone = function (arr){
 	return newArr;
 }
 
-//ajax载入数据
-com.getData = function (url,fun){
-	var XMLHttpRequestObject=false;
-	if(window.XMLHttpRequest){
-		XMLHttpRequestObject=new XMLHttpRequest();
-	}else if(window.ActiveXObject){
-	XMLHttpRequestObject=new ActiveXObject("Microsoft.XMLHTTP");
-	}
-	if(XMLHttpRequestObject){
-		XMLHttpRequestObject.open("GET",url);
-		XMLHttpRequestObject.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
-		XMLHttpRequestObject.onreadystatechange=function (){
-			if(XMLHttpRequestObject.readyState==4 && XMLHttpRequestObject.status==200){
-				fun (XMLHttpRequestObject.responseText)
-				//return XMLHttpRequestObject.responseText;
-			}
-		}
-	XMLHttpRequestObject.send(null);
-	}
-}
 
 //把坐标生成着法
 com.createMove = function (map,x,y,newX,newY){

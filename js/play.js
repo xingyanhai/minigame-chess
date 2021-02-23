@@ -1,6 +1,6 @@
 /*! 一叶孤舟 | qq:28701884 | 欢迎指教 */
 
-window.play = {};
+GameGlobal.play = {};
 
 play.init = function (){
 
@@ -36,7 +36,10 @@ play.init = function (){
 	play.show();
 
 	//绑定点击事件
-	com.canvas.addEventListener("click",play.clickCanvas)
+	// com.canvas.addEventListener("click",play.clickCanvas)
+	wx.onTouchStart(function (e) {
+		play.clickCanvas(e.changedTouches[0])
+	})
 	//clearInterval(play.timer);
 	//com.get("autoPlay").addEventListener("click", function(e) {
 		//clearInterval(play.timer);
@@ -309,9 +312,9 @@ play.indexOfPs = function (ps,xy){
 
 //获得点击的着点
 play.getClickPoint = function (e){
-	var domXY = com.getDomXY(com.canvas);
-	var x=Math.round((e.pageX-domXY.x-com.pointStartX-20)/com.spaceX)
-	var y=Math.round((e.pageY-domXY.y-com.pointStartY-20)/com.spaceY)
+	// var domXY = com.getDomXY(com.canvas);
+	var x=Math.round((e.pageX-com.pointStartX-20)/com.spaceX)
+	var y=Math.round((e.pageY-com.pointStartY-20)/com.spaceY)
 	return {"x":x,"y":y}
 }
 

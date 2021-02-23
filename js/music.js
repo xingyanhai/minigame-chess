@@ -38,6 +38,6 @@ class Music {
   }
 }
 
-window.music = new Music()
+GameGlobal.music = new Music()
 
 

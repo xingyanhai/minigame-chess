@@ -6,12 +6,15 @@ com.init = async function (stype){
 	com.nowStype= stype || com.getCookie("stype") ||"stype1";
 	var stype = com.stype[com.nowStype];
 	console.log(stype)
-	com.width			=	stype.width;		//画布宽度
-	com.height			=	stype.height; 		//画布高度
-	com.spaceX			=	stype.spaceX;		//着点X跨度
-	com.spaceY			=	stype.spaceY;		//着点Y跨度
-	com.pointStartX		=	stype.pointStartX;	//第一个着点X坐标;
-	com.pointStartY		=	stype.pointStartY;	//第一个着点Y坐标;
+	const { windowWidth, windowHeight } = wx.getSystemInfoSync()
+	let ratio = (windowWidth - 40) / stype.width
+	com.ratio           =   ratio;
+	com.width			=	stype.width * ratio;		//画布宽度
+	com.height			=	stype.height * ratio; 		//画布高度
+	com.spaceX			=	stype.spaceX * ratio;		//着点X跨度
+	com.spaceY			=	stype.spaceY * ratio;		//着点Y跨度
+	com.pointStartX		=	20+stype.pointStartX * ratio;	//第一个着点X坐标;
+	com.pointStartY		=	20+stype.pointStartY * ratio;	//第一个着点Y坐标;
 	com.page			=	stype.page;			//图片目录
 
 	// com.get("box").style.width = com.width+130+"px";
@@ -794,7 +797,7 @@ com.class.Man = function (key, x, y){
 		if (this.isShow) {
 			com.ct.save();
 			com.ct.globalAlpha = this.alpha;
-			com.ct.drawImage(com[this.pater].img,com.spaceX * this.x + com.pointStartX , com.spaceY *  this.y +com.pointStartY);
+			com.ct.drawImage(com[this.pater].img,com.spaceX * this.x + com.pointStartX , com.spaceY *  this.y + com.pointStartX, com.spaceX, com.spaceY);
 			com.ct.restore();
 		}
 	}
@@ -813,10 +816,11 @@ com.class.Bg = function (img, x, y){
 	this.show = function (){
 		if (this.isShow) {
 			console.log(com.bgImg, com.spaceX * this.x,com.spaceY *  this.y)
-			com.ct.drawImage(com.bgImg, com.spaceX * this.x,com.spaceY *  this.y);
+			com.ct.drawImage(com.bgImg, com.spaceX * this.x+ com.pointStartX,com.spaceY *  this.y+ com.pointStartX, com.width, com.height);
 		}
 	}
 }
+//棋子外框
 com.class.Pane = function (img, x, y){
 	this.x = x||0;
     this.y = y||0;
@@ -826,12 +830,12 @@ com.class.Pane = function (img, x, y){
 
 	this.show = function (){
 		if (this.isShow) {
-			com.ct.drawImage(com.paneImg, com.spaceX * this.x + com.pointStartX , com.spaceY *  this.y + com.pointStartY)
-			com.ct.drawImage(com.paneImg, com.spaceX * this.newX + com.pointStartX  , com.spaceY *  this.newY + com.pointStartY)
+			com.ct.drawImage(com.paneImg, com.spaceX * this.x + com.pointStartX , com.spaceY *  this.y + com.pointStartY, com.spaceX, com.spaceY)
+			com.ct.drawImage(com.paneImg, com.spaceX * this.newX + com.pointStartX  , com.spaceY *  this.newY + com.pointStartY, com.spaceX, com.spaceY)
 		}
 	}
 }
-
+// 走棋提示线
 com.class.Dot = function (img, x, y){
 	this.x = x||0;
     this.y = y||0;
@@ -840,7 +844,7 @@ com.class.Dot = function (img, x, y){
 
 	this.show = function (){
 		for (var i=0; i<this.dots.length;i++){
-			if (this.isShow) com.ct.drawImage(com.dotImg, com.spaceX * this.dots[i][0]+10  + com.pointStartX ,com.spaceY *  this.dots[i][1]+10 + com.pointStartY)
+			if (this.isShow) com.ct.drawImage(com.dotImg, com.spaceX * this.dots[i][0]+0  + com.pointStartX ,com.spaceY *  this.dots[i][1]+0 + com.pointStartY)
 		}
 	}
 }

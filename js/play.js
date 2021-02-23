@@ -327,9 +327,31 @@ play.getClickMan = function (e){
 play.showWin = function (my){
 	play.isPlay = false;
 	if (my===1){
-		alert("恭喜你，你赢了！");
+		wx.showModal({
+			title: '提示',
+			content: '恭喜你，你赢了！',
+			showCancel: false,
+			success (res) {
+				if (res.confirm) {
+					console.log('用户点击确定')
+				} else if (res.cancel) {
+					console.log('用户点击取消')
+				}
+			}
+		})
 	}else{
-		alert("很遗憾，你输了！");
+		wx.showModal({
+			title: '提示',
+			content: '很遗憾，你输了！',
+			showCancel: false,
+			success (res) {
+				if (res.confirm) {
+					console.log('用户点击确定')
+				} else if (res.cancel) {
+					console.log('用户点击取消')
+				}
+			}
+		})
 	}
 }
 

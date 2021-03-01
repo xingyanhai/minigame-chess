@@ -1,7 +1,43 @@
 /*! 一叶孤舟 | qq:28701884 | 欢迎指教 */
 
 GameGlobal.play = {};
+// 按钮事件
+play.btnEventHandler = function(e) {
+	// e.preventDefault()
 
+	const x = e.pageX
+	const y = e.pageY
+	// 悔棋
+	const area = com.regretBtnArea
+
+	if (x >= area.startX
+		&& x <= area.endX
+		&& y >= area.startY
+		&& y <= area.endY) {
+			play.regret();
+		}
+	// 重新开始
+	const area2 = 	com.restartBtnArea
+	if (x >= area2.startX
+		&& x <= area2.endX
+		&& y >= area2.startY
+		&& y <= area2.endY) {
+		wx.showModal({
+			title: '提示',
+			content: '确定重新开始？',
+			showCancel: true,
+			success (res) {
+				if (res.confirm) {
+					play.isPlay=true ;
+					play.depth = 3;
+					play.init();
+				} else if (res.cancel) {
+					console.log('用户点击取消')
+				}
+			}
+		})
+	}
+}
 play.init = function (){
 
 	play.my				=	1;				//玩家方
@@ -36,10 +72,14 @@ play.init = function (){
 	play.show();
 
 	//绑定点击事件
+	wx.offTouchStart()
 	// com.canvas.addEventListener("click",play.clickCanvas)
 	wx.onTouchStart(function (e) {
 		play.clickCanvas(e.changedTouches[0])
+		play.btnEventHandler(e.changedTouches[0])
+
 	})
+
 	//clearInterval(play.timer);
 	//com.get("autoPlay").addEventListener("click", function(e) {
 		//clearInterval(play.timer);

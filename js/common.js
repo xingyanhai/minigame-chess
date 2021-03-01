@@ -1,4 +1,5 @@
 /*! 一叶孤舟 | qq:28701884 | 欢迎指教 */
+// 经自我审查；玩家没走一步棋子,ai算法可自动走棋，直到分出胜负，游戏结束；
 const canvas = wx.createCanvas()
 GameGlobal.com = {};
 
@@ -7,7 +8,13 @@ com.init = async function (stype){
 	var stype = com.stype[com.nowStype];
 	console.log(stype)
 	const { windowWidth, windowHeight } = wx.getSystemInfoSync()
-	let ratio = (windowWidth - 40) / stype.width
+	const marginSide = 20
+	const marginTop = 100
+	const btnSpace = 20
+	const btnWidth = 100
+	const btnHeight = 50
+	const btnCount = 2
+	let ratio = (windowWidth - marginSide * 2) / stype.width
 	com.windowWidth = windowWidth;
 	com.windowHeight = windowHeight;
 	com.ratio           =   ratio;
@@ -15,10 +22,22 @@ com.init = async function (stype){
 	com.height			=	stype.height * ratio; 		//画布高度
 	com.spaceX			=	stype.spaceX * ratio;		//着点X跨度
 	com.spaceY			=	stype.spaceY * ratio;		//着点Y跨度
-	com.pointStartX		=	20+stype.pointStartX * ratio;	//第一个着点X坐标;
-	com.pointStartY		=	100+stype.pointStartY * ratio;	//第一个着点Y坐标;
+	com.pointStartX		=	marginSide+stype.pointStartX * ratio;	//第一个着点X坐标;
+	com.pointStartY		=	marginTop+stype.pointStartY * ratio;	//第一个着点Y坐标;
 	com.page			=	stype.page;			//图片目录
-
+	const firstBtnStartX = (windowWidth - (btnWidth * btnCount + (btnCount - 1) * btnSpace)) / 2
+	com.regretBtnArea = { // 悔棋按钮区域
+		startX: firstBtnStartX,
+		endX: firstBtnStartX + btnWidth,
+		startY: marginTop + com.height + btnSpace,
+		endY:   marginTop + com.height + btnSpace + btnHeight
+	};
+	com.restartBtnArea = { // 重新开始按钮区域
+		startX: com.regretBtnArea.endX + btnSpace,
+		endX: com.regretBtnArea.endX + btnSpace + btnWidth,
+		startY: marginTop + com.height + btnSpace,
+		endY:   marginTop + com.height + btnSpace + btnHeight
+	}
 	// com.get("box").style.width = com.width+130+"px";
 
 	com.canvas			=	canvas
@@ -144,7 +163,24 @@ com.loadImages = async function(stype){
 			com.paneImg.onload = () => {
 				resolve()
 			}
+		})),
+		new Promise((resolve => {
+			//悔棋
+			com.regretImg = wx.createImage();
+			com.regretImg.src  = "img/regret.png";
+			com.regretImg.onload = () => {
+				resolve()
+			}
+		})),
+		new Promise((resolve => {
+			//重新开始
+			com.restartImg = wx.createImage();
+			com.restartImg.src  = "img/restart.png";
+			com.restartImg.onload = () => {
+				resolve()
+			}
 		}))
+
 	)
 
 
@@ -815,7 +851,19 @@ com.class.Dot = function (img, x, y){
 		}
 	}
 }
-
+// 悔棋按钮、重新开始
+com.class.BtnArea = function (){
+	this.isShow = true;
+	this.show = function (){
+		if (this.isShow) {
+			console.log('show---btn')
+			const area1 = com.regretBtnArea
+			com.ct.drawImage(com.restartImg,area1.startX ,area1.startY,area1.endX-area1.startX,area1.endY-area1.startY)
+			const area2 = com.restartBtnArea
+			com.ct.drawImage(com.restartImg,area2.startX ,area2.startY,area2.endX-area2.startX,area2.endY-area2.startY)
+		}
+	}
+}
 
 
 

@@ -17,12 +17,14 @@ const init = async () => {
     com.bg=new com.class.Bg();
     com.dot = new com.class.Dot();
     com.pane=new com.class.Pane();
+    com.btnArea = new com.class.BtnArea()
     com.pane.isShow=false;
 
-    com.childList=[com.bg,com.dot,com.pane];
+    com.childList=[com.bg,com.dot,com.pane, com.btnArea];
     com.mans	 ={};		//棋子集合
     com.createMans(com.initMap)		//生成棋子
     com.bg.show();
+
 // com.addEvent()
     com.gambit = dataStr.gambit.split(" ");
     AI.historyBill = com.gambit;

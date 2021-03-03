@@ -63,7 +63,7 @@ com.stype = {
 		page:"stype_1"	//图片目录
 	},
 	stype1:{
-		width:530,		//画布宽度
+		width:510,		//画布宽度
 		height:567, 		//画布高度
 		spaceX:57,		//着点X跨度
 		spaceY:57,		//着点Y跨度
@@ -858,7 +858,7 @@ com.class.BtnArea = function (){
 		if (this.isShow) {
 			console.log('show---btn')
 			const area1 = com.regretBtnArea
-			com.ct.drawImage(com.restartImg,area1.startX ,area1.startY,area1.endX-area1.startX,area1.endY-area1.startY)
+			com.ct.drawImage(com.regretImg,area1.startX ,area1.startY,area1.endX-area1.startX,area1.endY-area1.startY)
 			const area2 = com.restartBtnArea
 			com.ct.drawImage(com.restartImg,area2.startX ,area2.startY,area2.endX-area2.startX,area2.endY-area2.startY)
 		}

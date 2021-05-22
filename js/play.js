@@ -16,6 +16,7 @@ play.btnEventHandler = function(e) {
 		&& y <= area.endY) {
 			play.regret();
 		}
+
 	// 重新开始
 	const area2 = 	com.restartBtnArea
 	if (x >= area2.startX

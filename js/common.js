@@ -4,9 +4,9 @@ const canvas = wx.createCanvas()
 GameGlobal.com = {};
 
 com.init = async function (stype){
-	com.nowStype= stype || com.getCookie("stype") ||"stype1";
+	// 修改style
+	com.nowStype= stype ||"stype1";
 	var stype = com.stype[com.nowStype];
-	console.log(stype)
 	const { windowWidth, windowHeight } = wx.getSystemInfoSync()
 	const marginSide = 20
 	const marginTop = 100

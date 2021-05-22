@@ -38,3 +38,92 @@ const init = async () => {
     }, 1000)
 }
 init()
+
+wx.showShareMenu()
+
+
+
+
+
+
+
+function timeout (time = 2000) {
+    return new Promise((resolve)=>{
+        setTimeout(()=>{
+            resolve()
+        }, time)
+    })
+}
+
+// 广告
+async function addInit () {
+    const { windowWidth, windowHeight } = wx.getSystemInfoSync()
+    const addList = []
+
+
+    // 创建 原生模板广告 广告实例，提前初始化
+    let customAd = wx.createCustomAd({
+        adUnitId: 'adunit-f227474a427d718f',
+        adIntervals: 30, // 自动刷新频率不能小于30秒
+        style: {
+            left: (windowWidth * 0.2) / 2,
+            top: windowHeight - 80,
+        }
+    })
+    customAd.onError((err)=>{
+        console.log('errrr',err)
+    })
+    addList.push(customAd)
+
+
+    // 创建 原生模板广告 广告实例，提前初始化
+    let customAd2 = wx.createCustomAd({
+        adUnitId: 'adunit-9fcb3862f0265cf8',
+        adIntervals: 30, // 自动刷新频率不能小于30秒
+        style: {
+            left: (windowWidth * 0.8) / 2,
+            top: windowHeight - 80,
+        }
+    })
+    customAd2.onError((err)=>{
+        console.log('errrr',err)
+    })
+    addList.push(customAd2)
+
+
+
+    // 创建 Banner 广告实例，提前初始化
+    let bannerAd = wx.createBannerAd({
+        adUnitId: 'adunit-ef3e752c3b086586',
+        adIntervals: 30, // 自动刷新频率不能小于30秒
+        style: {
+            left: (windowWidth - 300) / 2,
+            top: windowHeight - 80,
+            width: 300
+        }
+    })
+    bannerAd.onError((err)=>{
+        console.log('errrr',err)
+    })
+    addList.push(bannerAd)
+
+
+
+    let currentIndex = 0
+    let preIndex = 0
+    function showAdd() {
+        addList[preIndex].hide()
+        addList[currentIndex].show()
+        preIndex = currentIndex
+        currentIndex ++
+        if(currentIndex >= addList.length) {
+            currentIndex = 0
+        }
+    }
+    setTimeout(showAdd,2000)
+    setInterval(showAdd, 60000)
+
+}
+addInit()
+
+
